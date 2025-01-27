@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,15 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="first-howto-finished_files/libs/clipboard/clipboard.min.js"></script>
-<script src="first-howto-finished_files/libs/quarto-html/quarto.js"></script>
+<script src="first-howto-finished_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="first-howto-finished_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="first-howto-finished_files/libs/quarto-html/popper.min.js"></script>
 <script src="first-howto-finished_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="first-howto-finished_files/libs/quarto-html/anchor.min.js"></script>
 <link href="first-howto-finished_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="first-howto-finished_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="first-howto-finished_files/libs/quarto-html/quarto-syntax-highlighting-494121dfa8658343c03537e94414993d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="first-howto-finished_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="first-howto-finished_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="first-howto-finished_files/libs/bootstrap/bootstrap-f926d2044c0529db3d43857e6dbc7d16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="first-howto-finished_files/libs/bootstrap/bootstrap-d34067094b08a5c37592ed31a9e49ec3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -116,35 +117,40 @@ window.Quarto = {
 <ul>
 <li>at least between <strong>```{r} and … ```</strong> (block-scope of course)</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>expression <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"some"</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>expression <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"some"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>expression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## [1] "some"</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "some"</code></pre>
+</div>
 <ul>
 <li><p>result of evaluation is printed below code block ^^^</p></li>
 <li><p><strong>``` {r setup} … ```</strong> - for global options setup; shows run cell button too</p></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width=</span><span class="dv">9</span>, <span class="at">fig.height=</span><span class="dv">6</span>) <span class="co"># sets up output figs (8 x 6 '')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width=</span><span class="dv">9</span>, <span class="at">fig.height=</span><span class="dv">6</span>) <span class="co"># sets up output figs (8 x 6)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><strong>``` {r computing} … ```</strong> - for some math calculations and similar</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">+</span><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span> <span class="co"># a simple calculator</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">+</span><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span> <span class="co"># a simple calculator</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>)  <span class="co"># boring random numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## [1] -0.56047565 -0.23017749  1.55870831  0.07050839  0.12928774</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.56047565 -0.23017749  1.55870831  0.07050839  0.12928774</code></pre>
+</div>
 <ul>
 <li><strong>``` {r graphics} … ```</strong> - for plots, graphs etc</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mai =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="dv">2</span>, <span class="fl">0.5</span>, <span class="dv">2</span>))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(mtcars, {</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(mpg<span class="sc">~</span>hp, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">col=</span><span class="st">'darkgray'</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">lowess</span>(hp, mpg))</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
+<div class="cell-output-display">
+<div>
 <figure class="figure">
-<p><img src="figure/graphics-1.png" class="img-fluid figure-img"></p>
-<figcaption>plot of chunk graphics</figcaption>
+<p><img src="first-howto-finished_files/figure-html/graphics-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
+</div>
 </div>
 </section>
 <section id="inline" class="level3">
@@ -167,20 +173,20 @@ window.Quarto = {
 </section>
 <section id="code-chunks-can-be-nested-within-eg.-lists" class="level3">
 <h3 class="anchored" data-anchor-id="code-chunks-can-be-nested-within-eg.-lists">Code chunks can be nested within eg. lists</h3>
-<ol type="1">
-<li>the area of a circle with radius x</li>
-</ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<p>1. the area of a circle with radius x</p>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    pi <span class="sc">*</span> y<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## [1] 12.56637</code></pre>
-<ol start="2" type="1">
-<li>OK, that is great</li>
-</ol>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.56637</code></pre>
+</div>
+<p>2. OK, that is great</p>
 </section>
 <section id="to-compile-me-use" class="level3">
 <h3 class="anchored" data-anchor-id="to-compile-me-use">To compile me, use</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">knit</span>(<span class="st">'knitr-how-tos/first-howto-finished.Rmd'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 

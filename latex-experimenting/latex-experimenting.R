@@ -2,11 +2,11 @@
 
 library('latexpdf')
 
-file <- file.path('tex-example/test.tex')
+file <- file.path('test.tex')
 writeLines(as.ltable(head(Theoph)), file)
 tex2pdf(file, clean = FALSE)
 
-`file <- file.path(tempdir(),'test.tex')
+file <- file.path(tempdir(),'test.tex')
 writeLines(as.ltable(head(Theoph)), file)
 ## Not run: 
 viewtex(file)
