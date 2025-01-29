@@ -10,7 +10,7 @@
 library(matlib)
 library(rmarkdown)
 library(knitr)
-#library(pandoc)  TODO ?? check whether this is correct
+library(pandoc)  # TODO ?? check whether this is correct
 knitr::opts_chunk$set(fig.width=9, fig.height=6) # sets up output figs (9 x 6)
 ```
 
@@ -27,9 +27,10 @@ A
 # TODO not sure whether this below is correct either
 
 ```{r lat}
-latexMatrix(
+a <- latexMatrix(
       A
-)
+) |> print()
+matrix2latex(A)
 ```
 
 
@@ -47,7 +48,7 @@ TODO renders twice, both times badly, fix
 
 ```{r eqn}
 latexMatrix(
-      matrix(showEqn(A, matrix(b, nrow = 1), vars = matrix(x, nrow = 1)))
+      matrix(showEqn(A, matrix(b, nrow = 1), vars = matrix(x, nrow = 1), latex = TRUE))
 )
 ```
 

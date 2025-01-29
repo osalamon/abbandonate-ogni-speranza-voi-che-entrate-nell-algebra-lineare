@@ -1,0 +1,64 @@
+```{r libs}
+library(matlib)
+library(knitr)
+```
+
+# Example 3 (version 2)
+
+## Find all solution of systems of linear equations of the form **Ax=b**, where:
+A <- matrix(
+        c( 1, 1, 2,
+           1, 1, 0 ), 2, 3, byrow=TRUE)
+
+b <- c(0, 1)
+
+### Show equations (in Latex):
+showEqn(A, b, fractions = TRUE, latex = TRUE)
+
+$$
+\begin{array}{lllllll}
+1 \cdot x_1 &+& 1 \cdot x_2 &+& 2 \cdot x_3  &=&  0 \\ 
+1 \cdot x_1 &+& 1 \cdot x_2 &+& 0 \cdot x_3  &=&  1 \\ 
+\end{array}
+$$
+
+### Solve equation:
+
+Solve(A, b)
+
+```r
+# Result:
+x1 + x2    =     1 
+       x3  =  -0.5 
+```
+
+Solve(A, b, verbose = TRUE, fractions = TRUE)
+
+```r
+# Showing solution verbose step by step, ie. the row operations, created by `solve` command above:
+Initial matrix:
+     [,1] [,2] [,3] [,4]
+[1,] 1    1    2    0   
+[2,] 1    1    0    1   
+
+row: 1 
+
+ subtract row 1 from row 2 
+     [,1] [,2] [,3] [,4]
+[1,]  1    1    2    0  
+[2,]  0    0   -2    1  
+
+row: 2 
+
+ multiply row 2 by -1/2 
+     [,1] [,2] [,3] [,4]
+[1,]    1    1    2    0
+[2,]    0    0    1 -1/2
+
+ multiply row 2 by 2 and subtract from row 1 
+     [,1] [,2] [,3] [,4]
+[1,]    1    1    0    1
+[2,]    0    0    1 -1/2
+x1 + x2    =     1 
+       x3  =  -1/2 
+```

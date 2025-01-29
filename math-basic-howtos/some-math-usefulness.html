@@ -117,18 +117,27 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(matlib)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(pandoc)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width=</span><span class="dv">9</span>, <span class="at">fig.height=</span><span class="dv">6</span>) <span class="co"># sets up output figs (9 x 6)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pandoc)  <span class="co"># </span><span class="al">TODO</span><span class="co"> ?? check whether this is correct</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pandoc'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:rmarkdown':
+
+    pandoc_available, pandoc_convert, pandoc_version</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width=</span><span class="dv">9</span>, <span class="at">fig.height=</span><span class="dv">6</span>) <span class="co"># sets up output figs (9 x 6)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="indexing-each-matrices-variable-element" class="level2">
-<h2 class="anchored" data-anchor-id="indexing-each-matrices-variable-element">Indexing each matrices variable element</h2>
+<h2 class="anchored" data-anchor-id="indexing-each-matrices-variable-element">1. INDEXING each matrices variable element</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">paste0</span>(<span class="st">'a_{'</span>, <span class="fu">outer</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">FUN  =</span> paste0), <span class="st">'}'</span>), </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">paste0</span>(<span class="st">'a_{'</span>, <span class="fu">outer</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">FUN  =</span> paste0), <span class="st">'}'</span>), </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1]     [,2]     [,3]     [,4]    
 [1,] "a_{11}" "a_{12}" "a_{13}" "a_{14}"
@@ -137,10 +146,13 @@ window.Quarto = {
 [4,] "a_{41}" "a_{42}" "a_{43}" "a_{44}"</code></pre>
 </div>
 </div>
+</section>
+<section id="todo-not-sure-whether-this-below-is-correct-either" class="level1">
+<h1>TODO not sure whether this below is correct either</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">latexMatrix</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>      A</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">latexMatrix</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      A</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\begin{pmatrix} 
 a_{11} &amp; a_{12} &amp; a_{13} &amp; a_{14} \\ 
@@ -149,40 +161,55 @@ a_{31} &amp; a_{32} &amp; a_{33} &amp; a_{34} \\
 a_{41} &amp; a_{42} &amp; a_{43} &amp; a_{44} \\ 
 \end{pmatrix}</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix2latex</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in matrix2latex(A): Function is deprecated. See latexMatrix() and Eqn()
+for more recent approaches</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>\left[
+ \begin{array}{llll}
+  a_{11} &amp; a_{12} &amp; a_{13} &amp; a_{14} \\ 
+  a_{21} &amp; a_{22} &amp; a_{23} &amp; a_{24} \\ 
+  a_{31} &amp; a_{32} &amp; a_{33} &amp; a_{34} \\ 
+  a_{41} &amp; a_{42} &amp; a_{43} &amp; a_{44} \\ 
+  \end{array} \right]</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"b_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"b_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "b_1" "b_2" "b_3" "b_4"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "x_1" "x_2" "x_3" "x_4"</code></pre>
 </div>
 </div>
+<p>TODO renders twice, both times badly, fix</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">latexMatrix</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">matrix</span>(<span class="fu">showEqn</span>(A, <span class="fu">matrix</span>(b, <span class="at">nrow =</span> <span class="dv">1</span>), <span class="at">vars =</span> <span class="fu">matrix</span>(x, <span class="at">nrow =</span> <span class="dv">1</span>)))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">latexMatrix</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">matrix</span>(<span class="fu">showEqn</span>(A, <span class="fu">matrix</span>(b, <span class="at">nrow =</span> <span class="dv">1</span>), <span class="at">vars =</span> <span class="fu">matrix</span>(x, <span class="at">nrow =</span> <span class="dv">1</span>), <span class="at">latex =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>a_{11}*x_1 + a_{12}*x_2 + a_{13}*x_3 + a_{14}*x_4  =  b_1 
-a_{21}*x_1 + a_{22}*x_2 + a_{23}*x_3 + a_{24}*x_4  =  b_2 
-a_{31}*x_1 + a_{32}*x_2 + a_{33}*x_3 + a_{34}*x_4  =  b_3 
-a_{41}*x_1 + a_{42}*x_2 + a_{43}*x_3 + a_{44}*x_4  =  b_4 </code></pre>
+<pre><code>\begin{array}{lllllllll}
+a_{11} \cdot x__1 &amp;+&amp; a_{12} \cdot x__2 &amp;+&amp; a_{13} \cdot x__3 &amp;+&amp; a_{14} \cdot x__4  &amp;=&amp;  b_1 \\ 
+a_{21} \cdot x__1 &amp;+&amp; a_{22} \cdot x__2 &amp;+&amp; a_{23} \cdot x__3 &amp;+&amp; a_{24} \cdot x__4  &amp;=&amp;  b_2 \\ 
+a_{31} \cdot x__1 &amp;+&amp; a_{32} \cdot x__2 &amp;+&amp; a_{33} \cdot x__3 &amp;+&amp; a_{34} \cdot x__4  &amp;=&amp;  b_3 \\ 
+a_{41} \cdot x__1 &amp;+&amp; a_{42} \cdot x__2 &amp;+&amp; a_{43} \cdot x__3 &amp;+&amp; a_{44} \cdot x__4  &amp;=&amp;  b_4 \\ 
+\end{array}</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\begin{pmatrix} 
-a_{11}*x_1 + a_{12}*x_2 + a_{13}*x_3 + a_{14}*x_4  =  b_1 \\ 
-a_{21}*x_1 + a_{22}*x_2 + a_{23}*x_3 + a_{24}*x_4  =  b_2 \\ 
-a_{31}*x_1 + a_{32}*x_2 + a_{33}*x_3 + a_{34}*x_4  =  b_3 \\ 
-a_{41}*x_1 + a_{42}*x_2 + a_{43}*x_3 + a_{44}*x_4  =  b_4 \\ 
+ \\ 
 \end{pmatrix}</code></pre>
 </div>
 </div>
+<p>TODO wrong below</p>
 <p><span class="math display">\[
 \begin{array}{lllllllll}
       a_{11} \cdot x__1 &amp;+&amp; a_{12} \cdot x__2 &amp;+&amp; a_{13} \cdot x__3 &amp;+&amp; a_{14} \cdot x__4  &amp;=&amp;  b_1 \\
@@ -191,24 +218,30 @@ a_{41}*x_1 + a_{42}*x_2 + a_{43}*x_3 + a_{44}*x_4  =  b_4 \\
       a_{41} \cdot x__1 &amp;+&amp; a_{42} \cdot x__2 &amp;+&amp; a_{43} \cdot x__3 &amp;+&amp; a_{44} \cdot x__4  &amp;=&amp;  b_4 \\
 \end{array}
 \]</span></p>
+<section id="discovered-accidentally-totally-awesome-cool-fn-outer" class="level2">
+<h2 class="anchored" data-anchor-id="discovered-accidentally-totally-awesome-cool-fn-outer">2. DISCOVERED accidentally totally AWESOME COOL FN <strong><code>OUTER</code></strong>!!!</h2>
 </section>
-<section id="it-is-done-by-very-cool-fn-outer" class="level2">
-<h2 class="anchored" data-anchor-id="it-is-done-by-very-cool-fn-outer">It is done by very cool fn OUTER</h2>
+<section id="todo-learn-more-about-it" class="level2">
+<h2 class="anchored" data-anchor-id="todo-learn-more-about-it">TODO learn more about it</h2>
 </section>
-<section id="the-fn-takes-1st-arg-and-makes-13-rows-as-plain-char-for-each-column-thx-to-paste0ie." class="level2">
-<h2 class="anchored" data-anchor-id="the-fn-takes-1st-arg-and-makes-13-rows-as-plain-char-for-each-column-thx-to-paste0ie.">The fn takes 1st arg and makes (1:3) rows as plain char for each column (thx to paste0),ie.</h2>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section">1, 1, 1, …</h3>
+<section id="so-far-i-found-out" class="level2">
+<h2 class="anchored" data-anchor-id="so-far-i-found-out">So far I found out:</h2>
+<section id="the-fn-takes-1st-arg-and-makes-eg.-13-rows-as-plain-chars-for-each-column-thx-to-fun-paste0ie." class="level3">
+<h3 class="anchored" data-anchor-id="the-fn-takes-1st-arg-and-makes-eg.-13-rows-as-plain-chars-for-each-column-thx-to-fun-paste0ie.">The fn takes 1st arg and makes (eg. 1:3) rows as plain chars for each column (thx to FUN paste0),ie.</h3>
+<section id="section" class="level4">
+<h4 class="anchored" data-anchor-id="section">1, 1, 1, …</h4>
 </section>
-<section id="section-1" class="level3">
-<h3 class="anchored" data-anchor-id="section-1">2, 2, 2, …</h3>
+<section id="section-1" class="level4">
+<h4 class="anchored" data-anchor-id="section-1">2, 2, 2, …</h4>
 </section>
-<section id="section-2" class="level3">
-<h3 class="anchored" data-anchor-id="section-2">3, 3, 3, …</h3>
+<section id="section-2" class="level4">
+<h4 class="anchored" data-anchor-id="section-2">3, 3, 3, …</h4>
+</section>
 </section>
 </section>
 <section id="but-true-magic-happens-when-the-2nd-argument-creates-13-columns-for-each-row" class="level2">
 <h2 class="anchored" data-anchor-id="but-true-magic-happens-when-the-2nd-argument-creates-13-columns-for-each-row">But true magic happens when the 2nd argument creates (1:3) columns for each row</h2>
+</section>
 </section>
 <section id="outerx-y-fun-1st-argument-x-and-2nd-argument-y-are-usually-arrays-vectors" class="level1">
 <h1>outer(X, Y, FUN = “*“, …) =&gt; 1st argument X and 2nd argument Y are usually arrays, vectors</h1>
@@ -221,9 +254,26 @@ a_{41}*x_1 + a_{42}*x_2 + a_{43}*x_3 + a_{44}*x_4  =  b_4 \\
 <section id="to-compile-me-use" class="level3">
 <h3 class="anchored" data-anchor-id="to-compile-me-use">To compile me, use</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">knit</span>(<span class="st">'math-basic-howtos/some-math-usefulness.Rmd'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">knit</span>(<span class="st">'math-basic-howtos/some-math-usefulness.Rmd'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="another-quite-extraordinary-interesting-functions---inverse-or-inv-as-well-knitrpurl" class="level2">
+<h2 class="anchored" data-anchor-id="another-quite-extraordinary-interesting-functions---inverse-or-inv-as-well-knitrpurl">3. ANOTHER quite extraordinary interesting functions - Inverse (or inv) (as well knitr::purl)</h2>
+</section>
+<section id="todo-check-them-and-play-with-them-at-least-for-a-moment-also-clean-this-mess" class="level2">
+<h2 class="anchored" data-anchor-id="todo-check-them-and-play-with-them-at-least-for-a-moment-also-clean-this-mess">TODO check them and play with them at least for a moment, also, clean this mess:</h2>
+<p>library(matlib)</p>
+<p>A &lt;- matrix( c(5, 1, 0, 3,-1, 2, 4, 0,-1), nrow=3, byrow=TRUE) det(A) # Only non-singular matrices have an inverse. inv(A) Inverse(A, verbose=TRUE, fractions=TRUE) #fractions=FALSE) # verbose=TRUE,</p>
+<p>(x &lt;- matrix(1:4, ncol = 2)) unlist(determinant(x)) det(x)</p>
+<p>B &lt;- matrix(1:12, 3, 4) / 6 printMatrix(B, fractions=TRUE) printMatrix(B, latex=TRUE)</p>
+<p>library(knitr) wrap_rmd(text = c(“<code>", "1+1", "</code>”, “- a list item”, “&gt; a quote”, ““, paste(rep(”this is a normal paragraph”, 5), collapse = ” “)))</p>
+<p>library(knitr) (f = system.file(“examples”, “knitr-minimal.Rmd”, package = “knitr”)) knit(f) # compile to tex</p>
+<p>purl(f) # tangle R code purl(f, documentation = 0) # extract R code only purl(f, documentation = 2) # also include documentation</p>
+<p>unlink(c(“knitr-minimal.tex”, “knitr-minimal.R”, “figure”), recursive = TRUE)</p>
+</section>
+<section id="todo---another-function-echelona-b" class="level2">
+<h2 class="anchored" data-anchor-id="todo---another-function-echelona-b">4. TODO - another function = echelon(A, b)</h2>
 <p>\end{document}</p>
 </section>
 </section>
