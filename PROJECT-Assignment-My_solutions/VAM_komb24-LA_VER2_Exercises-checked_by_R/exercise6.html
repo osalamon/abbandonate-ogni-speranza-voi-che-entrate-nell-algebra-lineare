@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Ondrej Salamon" />
 
 
-<title>example3.knit</title>
+<title>LA1 - Version 2 - Exercise 6</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,65 +349,595 @@ display: none;
 
 
 
+<h1 class="title toc-ignore">LA1 - Version 2 - Exercise 6</h1>
+<h4 class="author">Ondrej Salamon</h4>
 
 </div>
 
 
-<p>c(library(matlib), library(knitr))</p>
-<div id="example-1-version-2" class="section level1">
-<h1>Example 1 (version 2)</h1>
-<div id="find-all-solution-of-systems-of-linear-equations-of-the-form-axb-where" class="section level2">
-<h2>Find all solution of systems of linear equations of the form
-<strong>Ax=b</strong>, where:</h2>
-<p>A &lt;- matrix( c( 1, 1, 2, 1, 1, 0 ), 2, 3, byrow=TRUE)</p>
-<p>b &lt;- c(0, 1)</p>
-<div id="show-equations-in-latex" class="section level3">
-<h3>Show equations (in Latex):</h3>
-<p>showEqn(A, b, fractions = TRUE, latex = TRUE)</p>
+<pre class="r"><code># initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
+library(matlib)
+library(knitr)
+library(rmarkdown)
+library(quarto)
+library(tinytex)
+library(pandoc)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)</code></pre>
+<div id="the-matrix-to-be-solved" class="section level3">
+<h3>The matrix to be solved:</h3>
+<pre class="r"><code>A &lt;- matrix(
+        c( 0,-2, 2,-1,
+           1, 2,-2, 1,
+           2,-1, 0, 1,
+          -2, 0, 1,-1), 4, 4, byrow = TRUE)
+b &lt;- c(-1, 2, 4,-4)</code></pre>
+<div id="show-in-latex" class="section level4">
+<h4>Show (in Latex)</h4>
+<pre><code>showEqn(A, b, fractions = TRUE, latex = TRUE)</code></pre>
 <p><span class="math display">\[
-\begin{array}{lllllll}
-1 \cdot x_1 &amp;+&amp; 1 \cdot x_2 &amp;+&amp; 2 \cdot
-x_3  &amp;=&amp;  0 \\
-1 \cdot x_1 &amp;+&amp; 1 \cdot x_2 &amp;+&amp; 0 \cdot
-x_3  &amp;=&amp;  1 \\
+\begin{array}{lllllllll}
+0 \cdot x_1 &amp;-&amp; 2 \cdot x_2 &amp;+&amp; 2 \cdot x_3 &amp;-&amp;
+1 \cdot x_4  &amp;=&amp;  -1 \\
+1 \cdot x_1 &amp;+&amp; 2 \cdot x_2 &amp;-&amp; 2 \cdot x_3 &amp;+&amp;
+1 \cdot x_4  &amp;=&amp;   2 \\
+2 \cdot x_1 &amp;-&amp; 1 \cdot x_2 &amp;+&amp; 0 \cdot x_3 &amp;+&amp;
+1 \cdot x_4  &amp;=&amp;   4 \\
+-2 \cdot x_1 &amp;+&amp; 0 \cdot x_2 &amp;+&amp; 1 \cdot x_3 &amp;-&amp;
+1 \cdot x_4  &amp;=&amp;  -4 \\
 \end{array}
 \]</span></p>
 </div>
-<div id="solve-equation" class="section level3">
-<h3>Solve equation:</h3>
-<p>Solve(A, b)</p>
-<pre class="r"><code># Result:
-x1 + x2    =     1 
-       x3  =  -0.5 </code></pre>
-<p>Solve(A, b, verbose = TRUE, fractions = TRUE)</p>
-<pre class="r"><code># Showing solution verbose step by step, ie. the row operations, created by `solve` command above:
-Initial matrix:
-     [,1] [,2] [,3] [,4]
-[1,] 1    1    2    0   
-[2,] 1    1    0    1   
-
-row: 1 
-
- subtract row 1 from row 2 
-     [,1] [,2] [,3] [,4]
-[1,]  1    1    2    0  
-[2,]  0    0   -2    1  
-
-row: 2 
-
- multiply row 2 by -1/2 
-     [,1] [,2] [,3] [,4]
-[1,]    1    1    2    0
-[2,]    0    0    1 -1/2
-
- multiply row 2 by 2 and subtract from row 1 
-     [,1] [,2] [,3] [,4]
-[1,]    1    1    0    1
-[2,]    0    0    1 -1/2
-x1 + x2    =     1 
-       x3  =  -1/2 </code></pre>
 </div>
+<div id="matrix-ab1" class="section level3">
+<h3>Matrix Ab1</h3>
+<pre class="r"><code>Ab1 &lt;- matrix(c( -1,-2, 2,-1,
+                 2, 2,-2, 1,
+                 4,-1, 0, 1,
+                -4, 0, 1,-1), 4, 4, byrow = TRUE)</code></pre>
 </div>
+<div id="determinant-of-ab1---step-by-step-solution" class="section level3">
+<h3>Determinant of Ab1 - step by step solution:</h3>
+<pre class="r"><code>Det(Ab1, verbose = T, fractions = TRUE)</code></pre>
+<pre><code>## 
+## Initial matrix:</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,] -1   -2    2   -1  
+## [2,]  2    2   -2    1  
+## [3,]  4   -1    0    1  
+## [4,] -4    0    1   -1  
+## 
+## row: 1 
+## 
+##  exchange rows 1 and 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  4   -1    0    1  
+## [2,]  2    2   -2    1  
+## [3,] -1   -2    2   -1  
+## [4,] -4    0    1   -1  
+## 
+##  multiply row 1 by 1/4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/4    0  1/4
+## [2,]    2    2   -2    1
+## [3,]   -1   -2    2   -1
+## [4,]   -4    0    1   -1
+## 
+##  multiply row 1 by 2 and subtract from row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/4    0  1/4
+## [2,]    0  5/2   -2  1/2
+## [3,]   -1   -2    2   -1
+## [4,]   -4    0    1   -1
+## 
+##  multiply row 1 by 1 and add to row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/4    0  1/4
+## [2,]    0  5/2   -2  1/2
+## [3,]    0 -9/4    2 -3/4
+## [4,]   -4    0    1   -1
+## 
+##  multiply row 1 by 4 and add to row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/4    0  1/4
+## [2,]    0  5/2   -2  1/2
+## [3,]    0 -9/4    2 -3/4
+## [4,]    0   -1    1    0
+## 
+## row: 2 
+## 
+##  multiply row 2 by 2/5</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/4    0  1/4
+## [2,]    0    1 -4/5  1/5
+## [3,]    0 -9/4    2 -3/4
+## [4,]    0   -1    1    0
+## 
+##  multiply row 2 by 1/4 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0 -1/5 3/10
+## [2,]    0    1 -4/5  1/5
+## [3,]    0 -9/4    2 -3/4
+## [4,]    0   -1    1    0
+## 
+##  multiply row 2 by 9/4 and add to row 3</code></pre>
+<pre><code>##      [,1]  [,2]  [,3]  [,4] 
+## [1,]     1     0  -1/5  3/10
+## [2,]     0     1  -4/5   1/5
+## [3,]     0     0   1/5 -3/10
+## [4,]     0    -1     1     0
+## 
+##  multiply row 2 by 1 and add to row 4</code></pre>
+<pre><code>##      [,1]  [,2]  [,3]  [,4] 
+## [1,]     1     0  -1/5  3/10
+## [2,]     0     1  -4/5   1/5
+## [3,]     0     0   1/5 -3/10
+## [4,]     0     0   1/5   1/5
+## 
+## row: 3 
+## 
+##  multiply row 3 by 5</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0 -1/5 3/10
+## [2,]    0    1 -4/5  1/5
+## [3,]    0    0    1 -3/2
+## [4,]    0    0  1/5  1/5
+## 
+##  multiply row 3 by 1/5 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1 -4/5  1/5
+## [3,]    0    0    1 -3/2
+## [4,]    0    0  1/5  1/5
+## 
+##  multiply row 3 by 4/5 and add to row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0   -1
+## [3,]    0    0    1 -3/2
+## [4,]    0    0  1/5  1/5
+## 
+##  multiply row 3 by 1/5 and subtract from row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0   -1
+## [3,]    0    0    1 -3/2
+## [4,]    0    0    0  1/2
+## 
+## row: 4 
+## 
+##  multiply row 4 by 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0   -1
+## [3,]    0    0    1 -3/2
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 1 and add to row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1 -3/2
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 3/2 and add to row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,] 1    0    0    0   
+## [2,] 0    1    0    0   
+## [3,] 0    0    1    0   
+## [4,] 0    0    0    1   
+## 
+##  det = (-1)^1 x 4 x 5/2 x 1/5 x 1/2 = -1</code></pre>
+</div>
+<div id="matrix-ab2" class="section level3">
+<h3>Matrix Ab2</h3>
+<pre class="r"><code>Ab2 &lt;- matrix(
+        c( 0,-1, 2,-1,
+           1, 2,-2, 1,
+           2, 4, 0, 1,
+          -2,-4, 1,-1), 4, 4, byrow = TRUE)</code></pre>
+</div>
+<div id="determinant-of-ab2---step-by-step-solution" class="section level3">
+<h3>Determinant of Ab2 - step by step solution:</h3>
+<pre class="r"><code>Det(Ab2, verbose = TRUE, fractions = TRUE)</code></pre>
+<pre><code>## 
+## Initial matrix:</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0   -1    2   -1  
+## [2,]  1    2   -2    1  
+## [3,]  2    4    0    1  
+## [4,] -2   -4    1   -1  
+## 
+## row: 1 
+## 
+##  exchange rows 1 and 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  2    4    0    1  
+## [2,]  1    2   -2    1  
+## [3,]  0   -1    2   -1  
+## [4,] -2   -4    1   -1  
+## 
+##  multiply row 1 by 1/2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    2    0  1/2 
+## [2,]   1    2   -2    1 
+## [3,]   0   -1    2   -1 
+## [4,]  -2   -4    1   -1 
+## 
+##  subtract row 1 from row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    2    0  1/2 
+## [2,]   0    0   -2  1/2 
+## [3,]   0   -1    2   -1 
+## [4,]  -2   -4    1   -1 
+## 
+##  multiply row 1 by 2 and add to row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    2    0  1/2 
+## [2,]   0    0   -2  1/2 
+## [3,]   0   -1    2   -1 
+## [4,]   0    0    1    0 
+## 
+## row: 2 
+## 
+##  exchange rows 2 and 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    2    0  1/2 
+## [2,]   0   -1    2   -1 
+## [3,]   0    0   -2  1/2 
+## [4,]   0    0    1    0 
+## 
+##  multiply row 2 by -1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    2    0  1/2 
+## [2,]   0    1   -2    1 
+## [3,]   0    0   -2  1/2 
+## [4,]   0    0    1    0 
+## 
+##  multiply row 2 by 2 and subtract from row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    4 -3/2
+## [2,]    0    1   -2    1
+## [3,]    0    0   -2  1/2
+## [4,]    0    0    1    0
+## 
+## row: 3 
+## 
+##  multiply row 3 by -1/2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    4 -3/2
+## [2,]    0    1   -2    1
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    1    0
+## 
+##  multiply row 3 by 4 and subtract from row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0 -1/2
+## [2,]    0    1   -2    1
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    1    0
+## 
+##  multiply row 3 by 2 and add to row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0 -1/2
+## [2,]    0    1    0  1/2
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    1    0
+## 
+##  subtract row 3 from row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0 -1/2
+## [2,]    0    1    0  1/2
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    0  1/4
+## 
+## row: 4 
+## 
+##  multiply row 4 by 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0 -1/2
+## [2,]    0    1    0  1/2
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 1/2 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0  1/2
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 1/2 and subtract from row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1 -1/4
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 1/4 and add to row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,] 1    0    0    0   
+## [2,] 0    1    0    0   
+## [3,] 0    0    1    0   
+## [4,] 0    0    0    1   
+## 
+##  det = (-1)^2 x 2 x -1 x -2 x 1/4 = 1</code></pre>
+</div>
+<div id="matrix-ab3" class="section level3">
+<h3>Matrix Ab3</h3>
+<pre class="r"><code>Ab3 &lt;- matrix(
+        c( 0,-2,-1,-1,
+           1, 2, 2, 1,
+           2,-1, 4, 1,
+          -2, 0,-4,-1), 4, 4, byrow = TRUE)</code></pre>
+</div>
+<div id="determinant-of-ab3---step-by-step-solution" class="section level3">
+<h3>Determinant of Ab3 - step by step solution:</h3>
+<pre class="r"><code>Det(Ab3, verbose = TRUE, fractions = TRUE)</code></pre>
+<pre><code>## 
+## Initial matrix:</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0   -2   -1   -1  
+## [2,]  1    2    2    1  
+## [3,]  2   -1    4    1  
+## [4,] -2    0   -4   -1  
+## 
+## row: 1 
+## 
+##  exchange rows 1 and 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  2   -1    4    1  
+## [2,]  1    2    2    1  
+## [3,]  0   -2   -1   -1  
+## [4,] -2    0   -4   -1  
+## 
+##  multiply row 1 by 1/2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    2  1/2
+## [2,]    1    2    2    1
+## [3,]    0   -2   -1   -1
+## [4,]   -2    0   -4   -1
+## 
+##  subtract row 1 from row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    2  1/2
+## [2,]    0  5/2    0  1/2
+## [3,]    0   -2   -1   -1
+## [4,]   -2    0   -4   -1
+## 
+##  multiply row 1 by 2 and add to row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    2  1/2
+## [2,]    0  5/2    0  1/2
+## [3,]    0   -2   -1   -1
+## [4,]    0   -1    0    0
+## 
+## row: 2 
+## 
+##  multiply row 2 by 2/5</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    2  1/2
+## [2,]    0    1    0  1/5
+## [3,]    0   -2   -1   -1
+## [4,]    0   -1    0    0
+## 
+##  multiply row 2 by 1/2 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    0    2  3/5 
+## [2,]   0    1    0  1/5 
+## [3,]   0   -2   -1   -1 
+## [4,]   0   -1    0    0 
+## 
+##  multiply row 2 by 2 and add to row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    2  3/5
+## [2,]    0    1    0  1/5
+## [3,]    0    0   -1 -3/5
+## [4,]    0   -1    0    0
+## 
+##  multiply row 2 by 1 and add to row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    2  3/5
+## [2,]    0    1    0  1/5
+## [3,]    0    0   -1 -3/5
+## [4,]    0    0    0  1/5
+## 
+## row: 3 
+## 
+##  multiply row 3 by -1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    0    2  3/5 
+## [2,]   0    1    0  1/5 
+## [3,]   0    0    1  3/5 
+## [4,]   0    0    0  1/5 
+## 
+##  multiply row 3 by 2 and subtract from row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0 -3/5
+## [2,]    0    1    0  1/5
+## [3,]    0    0    1  3/5
+## [4,]    0    0    0  1/5
+## 
+## row: 4 
+## 
+##  multiply row 4 by 5</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0 -3/5
+## [2,]    0    1    0  1/5
+## [3,]    0    0    1  3/5
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 3/5 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    0    0    0 
+## [2,]   0    1    0  1/5 
+## [3,]   0    0    1  3/5 
+## [4,]   0    0    0    1 
+## 
+##  multiply row 4 by 1/5 and subtract from row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   1    0    0    0 
+## [2,]   0    1    0    0 
+## [3,]   0    0    1  3/5 
+## [4,]   0    0    0    1 
+## 
+##  multiply row 4 by 3/5 and subtract from row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,] 1    0    0    0   
+## [2,] 0    1    0    0   
+## [3,] 0    0    1    0   
+## [4,] 0    0    0    1   
+## 
+##  det = (-1)^1 x 2 x 5/2 x -1 x 1/5 = 1</code></pre>
+</div>
+<div id="ab4" class="section level3">
+<h3>Ab4</h3>
+<pre class="r"><code>Ab4 &lt;- matrix(
+        c( 0,-2, 2,-1,
+           1, 2,-2, 2,
+           2,-1, 0, 4,
+          -2, 0, 1,-4), 4, 4, byrow = TRUE)</code></pre>
+</div>
+<div id="determinant-of-ab4---step-by-step-solution" class="section level3">
+<h3>Determinant of Ab4 - step by step solution:</h3>
+<pre class="r"><code>Det(Ab4, verbose = TRUE, fractions = TRUE)</code></pre>
+<pre><code>## 
+## Initial matrix:</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0   -2    2   -1  
+## [2,]  1    2   -2    2  
+## [3,]  2   -1    0    4  
+## [4,] -2    0    1   -4  
+## 
+## row: 1 
+## 
+##  exchange rows 1 and 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  2   -1    0    4  
+## [2,]  1    2   -2    2  
+## [3,]  0   -2    2   -1  
+## [4,] -2    0    1   -4  
+## 
+##  multiply row 1 by 1/2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    0    2
+## [2,]    1    2   -2    2
+## [3,]    0   -2    2   -1
+## [4,]   -2    0    1   -4
+## 
+##  subtract row 1 from row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    0    2
+## [2,]    0  5/2   -2    0
+## [3,]    0   -2    2   -1
+## [4,]   -2    0    1   -4
+## 
+##  multiply row 1 by 2 and add to row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    0    2
+## [2,]    0  5/2   -2    0
+## [3,]    0   -2    2   -1
+## [4,]    0   -1    1    0
+## 
+## row: 2 
+## 
+##  multiply row 2 by 2/5</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1 -1/2    0    2
+## [2,]    0    1 -4/5    0
+## [3,]    0   -2    2   -1
+## [4,]    0   -1    1    0
+## 
+##  multiply row 2 by 1/2 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0 -2/5    2
+## [2,]    0    1 -4/5    0
+## [3,]    0   -2    2   -1
+## [4,]    0   -1    1    0
+## 
+##  multiply row 2 by 2 and add to row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0 -2/5    2
+## [2,]    0    1 -4/5    0
+## [3,]    0    0  2/5   -1
+## [4,]    0   -1    1    0
+## 
+##  multiply row 2 by 1 and add to row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0 -2/5    2
+## [2,]    0    1 -4/5    0
+## [3,]    0    0  2/5   -1
+## [4,]    0    0  1/5    0
+## 
+## row: 3 
+## 
+##  multiply row 3 by 5/2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0 -2/5    2
+## [2,]    0    1 -4/5    0
+## [3,]    0    0    1 -5/2
+## [4,]    0    0  1/5    0
+## 
+##  multiply row 3 by 2/5 and add to row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    1
+## [2,]    0    1 -4/5    0
+## [3,]    0    0    1 -5/2
+## [4,]    0    0  1/5    0
+## 
+##  multiply row 3 by 4/5 and add to row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    1
+## [2,]    0    1    0   -2
+## [3,]    0    0    1 -5/2
+## [4,]    0    0  1/5    0
+## 
+##  multiply row 3 by 1/5 and subtract from row 4</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    1
+## [2,]    0    1    0   -2
+## [3,]    0    0    1 -5/2
+## [4,]    0    0    0  1/2
+## 
+## row: 4 
+## 
+##  multiply row 4 by 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    1
+## [2,]    0    1    0   -2
+## [3,]    0    0    1 -5/2
+## [4,]    0    0    0    1
+## 
+##  subtract row 4 from row 1</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0   -2
+## [3,]    0    0    1 -5/2
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 2 and add to row 2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1 -5/2
+## [4,]    0    0    0    1
+## 
+##  multiply row 4 by 5/2 and add to row 3</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,] 1    0    0    0   
+## [2,] 0    1    0    0   
+## [3,] 0    0    1    0   
+## [4,] 0    0    0    1   
+## 
+##  det = (-1)^1 x 2 x 5/2 x 2/5 x 1/2 = -1</code></pre>
+</div>
+<div id="final-solution-of-equations" class="section level3">
+<h3>Final solution of equations</h3>
+<pre><code>x1 = (det Ab1) / (det A) = -1 / -1 =  1
+x2 = (det Ab2) / (det A) =  1 / -1 = -1
+x3 = 1 / -1 = -1
+x4 = -1 / -1 = 1</code></pre>
 </div>
 
 

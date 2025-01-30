@@ -1,0 +1,125 @@
+---
+documentclass: article
+papersize: a4
+fontsize: 10pt
+links-as-notes: true
+title: "LA1 - Version 2 - Exercise 6"
+author: "Ondrej Salamon"
+header-includes: |
+   ```{=latex}
+   \usepackage[margin=0.75in]{geometry}
+   \usepackage{fancyhdr}
+   \let\proof\relax
+   \let\endproof\relax
+   \usepackage{amsmath}
+   \pagestyle{fancy}
+   \fancyhead{}
+   \fancyfoot{}
+   \lhead{LA1 Project}
+   \rhead{Exercise 6 (Version 2)}
+   \lfoot{January, 2025}\rfoot{Pg. \thepage}
+   ```
+output:
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+---
+```{r initial setup}
+# initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
+library(matlib)
+library(knitr)
+library(rmarkdown)
+library(quarto)
+library(tinytex)
+library(pandoc)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)
+```
+
+### The matrix to be solved:
+```{r mat}
+A <- matrix(
+        c( 0,-2, 2,-1,
+           1, 2,-2, 1,
+           2,-1, 0, 1,
+          -2, 0, 1,-1), 4, 4, byrow = TRUE)
+b <- c(-1, 2, 4,-4)
+```
+
+#### Show (in Latex)
+```
+showEqn(A, b, fractions = TRUE, latex = TRUE)
+```
+
+$$
+\begin{array}{lllllllll}
+ 0 \cdot x_1 &-& 2 \cdot x_2 &+& 2 \cdot x_3 &-& 1 \cdot x_4  &=&  -1 \\ 
+ 1 \cdot x_1 &+& 2 \cdot x_2 &-& 2 \cdot x_3 &+& 1 \cdot x_4  &=&   2 \\ 
+ 2 \cdot x_1 &-& 1 \cdot x_2 &+& 0 \cdot x_3 &+& 1 \cdot x_4  &=&   4 \\ 
+-2 \cdot x_1 &+& 0 \cdot x_2 &+& 1 \cdot x_3 &-& 1 \cdot x_4  &=&  -4 \\ 
+\end{array}
+$$
+
+### Matrix Ab1
+```{r matab1}
+Ab1 <- matrix(c( -1,-2, 2,-1,
+                 2, 2,-2, 1,
+                 4,-1, 0, 1,
+                -4, 0, 1,-1), 4, 4, byrow = TRUE)
+```
+
+### Determinant of Ab1 - step by step solution:
+```{r detab1}
+Det(Ab1, verbose = T, fractions = TRUE)
+```
+
+### Matrix Ab2
+```{r matab2}
+Ab2 <- matrix(
+        c( 0,-1, 2,-1,
+           1, 2,-2, 1,
+           2, 4, 0, 1,
+          -2,-4, 1,-1), 4, 4, byrow = TRUE)
+```
+
+### Determinant of Ab2 - step by step solution:
+```{r detab2}
+Det(Ab2, verbose = TRUE, fractions = TRUE)
+```
+
+### Matrix Ab3
+```{r matab3}
+Ab3 <- matrix(
+        c( 0,-2,-1,-1,
+           1, 2, 2, 1,
+           2,-1, 4, 1,
+          -2, 0,-4,-1), 4, 4, byrow = TRUE)
+```
+
+### Determinant of Ab3 - step by step solution:
+```{r detab3}
+Det(Ab3, verbose = TRUE, fractions = TRUE)
+```
+
+### Ab4
+```{r matab4}
+Ab4 <- matrix(
+        c( 0,-2, 2,-1,
+           1, 2,-2, 2,
+           2,-1, 0, 4,
+          -2, 0, 1,-4), 4, 4, byrow = TRUE)
+```
+
+### Determinant of Ab4 - step by step solution:
+```{r detab4}
+Det(Ab4, verbose = TRUE, fractions = TRUE)
+```
+
+### Final solution of equations
+```
+x1 = (det Ab1) / (det A) = -1 / -1 =  1
+x2 = (det Ab2) / (det A) =  1 / -1 = -1
+x3 = 1 / -1 = -1
+x4 = -1 / -1 = 1
+```
