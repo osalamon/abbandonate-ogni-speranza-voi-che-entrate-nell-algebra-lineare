@@ -54,7 +54,7 @@ A <- matrix(
 b <- c(-3, 5, -3, 3)
 ```
 
-### Code the equation in R matlib (commented out):
+### Code the equation in R matlib:
 
 ```
 Eqn(
