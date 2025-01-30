@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Ondrej Salamon" />
 
 
-<title>priklad1.knit</title>
+<title>LA1 - Version 2 - Exercise 2</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,51 +349,110 @@ display: none;
 
 
 
+<h1 class="title toc-ignore">LA1 - Version 2 - Exercise 2</h1>
+<h4 class="author">Ondrej Salamon</h4>
 
 </div>
 
 
-<p>library(matlib)</p>
-<div id="version-4" class="section level1">
-<h1>Version 4</h1>
-<div id="example-1" class="section level2">
-<h2>Example 1</h2>
-<div id="find-all-solution-of-systems-of-linear-equations-of-the-form-axb" class="section level3">
-<h3>Find all solution of systems of linear equations of the form
-<strong>Ax=b</strong></h3>
-<p>A &lt;- matrix(c(1, 2, 3, 4, 2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, 3), 4,
-4, byrow=TRUE)</p>
-<p>colnames(A) &lt;- paste0(‘x’, 1:4)</p>
-<p>b &lt;- c(20, 26, 28, 26)</p>
-<div id="show-equations" class="section level4">
-<h4>Show equations</h4>
-<p>showEqn(A, b, fractions = TRUE, latex = TRUE)</p>
-<p><span class="math display">\[
-\begin{array}{lllllllll}
-1 \cdot x_1 &amp;+&amp; 2 \cdot x_2 &amp;+&amp; 3 \cdot x_3 &amp;+&amp;
-4 \cdot x_4  &amp;=&amp;  20 \\
-2 \cdot x_1 &amp;+&amp; 3 \cdot x_2 &amp;+&amp; 4 \cdot x_3 &amp;+&amp;
-1 \cdot x_4  &amp;=&amp;  26 \\
-3 \cdot x_1 &amp;+&amp; 4 \cdot x_2 &amp;+&amp; 1 \cdot x_3 &amp;+&amp;
-2 \cdot x_4  &amp;=&amp;  28 \\
-4 \cdot x_1 &amp;+&amp; 1 \cdot x_2 &amp;+&amp; 2 \cdot x_3 &amp;+&amp;
-3 \cdot x_4  &amp;=&amp;  26 \\
-\end{array}
-\]</span></p>
+<pre class="r"><code># initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
+library(matlib)
+library(knitr)
+library(rmarkdown)
+library(quarto)
+library(tinytex)
+library(pandoc)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)</code></pre>
+<div id="compute-inverse-of-a" class="section level3">
+<h3>Compute inverse of A:</h3>
+<pre class="r"><code>A &lt;- matrix(c(2,-2, 1,
+              1,-1, 1,
+             -5, 6,-4), 3, 3, byrow=TRUE)
+
+Aminus &lt;- Inverse(A)</code></pre>
 </div>
-<div id="solve" class="section level4">
-<h4>Solve:</h4>
-<p>Solve(A, b, fractions = TRUE, verbose = TRUE)</p>
+<div id="code-the-result-in-r" class="section level3">
+<h3>Code the result in R:</h3>
+<pre><code>Eqn(
+    &quot;\\mathbf{A^-1} = &quot;,
+    latexMatrix(Aminus, matrix=&quot;bmatrix&quot;)
+)</code></pre>
 </div>
-<div id="echelon-form-with-the-steps-as-the-row-operations-neccessary-to-reduce-x-to-identity-matrix-i" class="section level4">
-<h4>Echelon form with the steps, as the row operations neccessary to
-reduce X to identity matrix I:</h4>
-<p>echelon(A, b, verbose=TRUE, fractions=TRUE)</p>
-<p>Ginv(A, verbose = TRUE, fractions = TRUE)</p>
-<p>plotEqn3d(A,b, xlim=c(0,5), ylim=c(0,5))</p>
+<div id="show-result-in-latex" class="section level3">
+<h3>Show result (in Latex):</h3>
+<span class="math display">\[\begin{equation*}
+\mathbf{A^-1} = \begin{bmatrix}
+2 &amp;  2 &amp;  1 \\
+1 &amp;  3 &amp;  1 \\
+-1 &amp;  2 &amp;  0 \\
+\end{bmatrix}
+\end{equation*}\]</span>
 </div>
+<div id="add-other-matrix-b-and-two-vectors-u-and-v" class="section level3">
+<h3>Add other matrix B and two vectors u and v:</h3>
+<pre class="r"><code>B &lt;- matrix(c( 2, 0, 2,
+              -1, 2, 0,
+               3, 3, 2), 3, 3, byrow=TRUE)</code></pre>
+<pre class="r"><code>u &lt;- c(3, 2, 2)</code></pre>
+<pre class="r"><code>v &lt;- c(2, 0, 1)</code></pre>
 </div>
+<div id="calculate-whole-exercise-alltogether" class="section level3">
+<h3>Calculate whole exercise alltogether:</h3>
+<pre class="r"><code>Au &lt;- A %*% u
+
+Bv &lt;- B %*% v
+
+AuBvplus = (Au + Bv)
+
+final = Aminus %*% AuBvplus</code></pre>
 </div>
+<div id="code-exercise-in-matlib-latex-compatible" class="section level3">
+<h3>Code exercise in matlib + Latex-compatible:</h3>
+<pre><code>Eqn(
+    &quot;\\mathbf{A^-1 * (Au + Bv)} =&quot;,
+    &quot;\\mathbf{A^-1} *&quot;,
+     latexMatrix(Au, matrix=&quot;bmatrix&quot;),
+     Eqn_hspace(mid=&#39;+&#39;),
+     latexMatrix(Bv, matrix=&quot;bmatrix&quot;),
+     Eqn_hspace(mid=&#39;=&#39;),
+     latexMatrix(Aminus, matrix=&quot;bmatrix&quot;),
+     Eqn_hspace(mid=&#39;*&#39;),
+     latexMatrix(AuBvplus, matrix=&quot;bmatrix&quot;),
+     Eqn_hspace(mid=&#39;=&#39;),
+     latexMatrix(final, matrix=&quot;bmatrix&quot;)
+)</code></pre>
+</div>
+<div id="show-exercise-solution-rs-latex-output" class="section level3">
+<h3>Show exercise solution (R’s Latex output)</h3>
+<span class="math display">\[\begin{equation*}
+\mathbf{A^-1 * (Au + Bv)} =\mathbf{A^-1} *\begin{bmatrix}
+  4 \\
+  3 \\
+-11 \\
+\end{bmatrix}
+\quad+\quad\begin{bmatrix}
+6 \\
+-2 \\
+8 \\
+\end{bmatrix}
+\quad=\quad\begin{bmatrix}
+2 &amp;  2 &amp;  1 \\
+1 &amp;  3 &amp;  1 \\
+-1 &amp;  2 &amp;  0 \\
+\end{bmatrix}
+\quad*\quad\begin{bmatrix}
+10 \\
+1 \\
+-3 \\
+\end{bmatrix}
+\quad=\quad\begin{bmatrix}
+19 \\
+10 \\
+-8 \\
+\end{bmatrix}
+\end{equation*}\]</span>
 </div>
 
 

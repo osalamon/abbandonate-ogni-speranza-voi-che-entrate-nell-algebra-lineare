@@ -1,0 +1,147 @@
+---
+documentclass: article
+papersize: a4
+fontsize: 10pt
+links-as-notes: true
+title: "LA1 - Version 2 - Exercise 2"
+author: "Ondrej Salamon"
+header-includes: |
+   ```{=latex}
+   \usepackage[margin=0.75in]{geometry}
+   \usepackage{fancyhdr}
+   \let\proof\relax
+   \let\endproof\relax
+   \usepackage{amsmath}
+   \pagestyle{fancy}
+   \fancyhead{}
+   \fancyfoot{}
+   \lhead{LA1 Project}
+   \rhead{Exercise 2 (Version 2)}
+   \lfoot{January, 2025}\rfoot{Pg. \thepage}
+   ```
+output:
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+---
+```{r initial setup}
+# initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
+library(matlib)
+library(knitr)
+library(rmarkdown)
+library(quarto)
+library(tinytex)
+library(pandoc)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)
+```
+
+### Compute inverse of A:
+
+```{r inv}
+A <- matrix(c(2,-2, 1,
+              1,-1, 1,
+             -5, 6,-4), 3, 3, byrow=TRUE)
+
+Aminus <- Inverse(A)
+```
+
+### Code the result in R:
+
+```
+Eqn(
+    "\\mathbf{A^-1} = ",
+    latexMatrix(Aminus, matrix="bmatrix")
+)
+```
+
+### Show result (in Latex):
+
+```{=latex}
+\begin{equation*}
+\mathbf{A^-1} = \begin{bmatrix} 
+ 2 &  2 &  1 \\ 
+ 1 &  3 &  1 \\ 
+-1 &  2 &  0 \\ 
+\end{bmatrix}
+\end{equation*}
+```
+
+### Add other matrix B and two vectors u and v:
+
+```{r bmat}
+B <- matrix(c( 2, 0, 2,
+              -1, 2, 0,
+               3, 3, 2), 3, 3, byrow=TRUE)
+```
+
+```{r uvect}
+u <- c(3, 2, 2)
+```
+
+```{r vvect}
+v <- c(2, 0, 1)
+```
+
+### Calculate whole exercise alltogether:
+
+```{r finalres}
+Au <- A %*% u
+
+Bv <- B %*% v
+
+AuBvplus = (Au + Bv)
+
+final = Aminus %*% AuBvplus
+```
+
+### Code exercise in matlib + Latex-compatible:
+
+```
+Eqn(
+    "\\mathbf{A^-1 * (Au + Bv)} =",
+    "\\mathbf{A^-1} *",
+     latexMatrix(Au, matrix="bmatrix"),
+     Eqn_hspace(mid='+'),
+     latexMatrix(Bv, matrix="bmatrix"),
+     Eqn_hspace(mid='='),
+     latexMatrix(Aminus, matrix="bmatrix"),
+     Eqn_hspace(mid='*'),
+     latexMatrix(AuBvplus, matrix="bmatrix"),
+     Eqn_hspace(mid='='),
+     latexMatrix(final, matrix="bmatrix")
+)
+```
+
+### Show exercise solution (R's Latex output)
+
+```{=latex}
+\begin{equation*}
+\mathbf{A^-1 * (Au + Bv)} =\mathbf{A^-1} *\begin{bmatrix} 
+  4 \\ 
+  3 \\ 
+-11 \\ 
+\end{bmatrix}
+\quad+\quad\begin{bmatrix} 
+ 6 \\ 
+-2 \\ 
+ 8 \\ 
+\end{bmatrix}
+\quad=\quad\begin{bmatrix} 
+ 2 &  2 &  1 \\ 
+ 1 &  3 &  1 \\ 
+-1 &  2 &  0 \\ 
+\end{bmatrix}
+\quad*\quad\begin{bmatrix} 
+10 \\ 
+ 1 \\ 
+-3 \\ 
+\end{bmatrix}
+\quad=\quad\begin{bmatrix} 
+19 \\ 
+10 \\ 
+-8 \\ 
+\end{bmatrix}
+\end{equation*}
+```
