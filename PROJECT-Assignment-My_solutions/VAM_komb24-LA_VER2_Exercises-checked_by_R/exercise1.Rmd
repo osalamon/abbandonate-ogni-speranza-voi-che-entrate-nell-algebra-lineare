@@ -1,30 +1,30 @@
 ---
 documentclass: article
 papersize: a4
-linestretch: 1.5
-fontsize: 12pt
+#linestretch: 1.5
+fontsize: 10pt
 links-as-notes: true
-title: LA1 version 2 - exercise 1
-author: Ondrej Salamon
-date: January, 2025
+title: "LA1 - Version 2 - Exercise 1"
+author: "Ondrej Salamon"
 header-includes: |
    ```{=latex}
+   \usepackage[margin=0.75in]{geometry}
    \usepackage{fancyhdr}
+   \let\proof\relax
+   \let\endproof\relax
    \usepackage{amsmath}
    \pagestyle{fancy}
    \fancyhead{}
    \fancyfoot{}
-   \lhead{LA1 version 2 - exercise 1}
-   \rhead{My Note}
-   \lfoot{\today}\rfoot{Pg. \thepage}
+   \lhead{LA1 Project}
+   \rhead{Exercise 1 (Version 2)}
+   \lfoot{January, 2025}\rfoot{Pg. \thepage}
    ```
 output:
   pdf_document:
     keep_tex: yes
     latex_engine: xelatex
-mainfont: Calibri Light
 ---
-
 ```{r initial setup}
 # initial setup
 options(scipen = 999)
@@ -35,11 +35,13 @@ library(rmarkdown)
 library(quarto)
 library(tinytex)
 library(pandoc)
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width=6, fig.height=6)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)
 ```
 
 ## Find all solution of systems of linear equations of the form **Ax=b**, where:
+
 ```{r equationsmatrix}
+# enter variable (matrix) A in R matlib pkg
 A <- matrix(
         c(-2, 1, 0,  2,
            3,-2, 0, -5,
@@ -48,21 +50,25 @@ A <- matrix(
 ```
 
 ```{r righthandside}
+# enter variable with right hand side vertical vector
 b <- c(-3, 5, -3, 3)
 ```
 
-### Show equations (setup):
-```{r eqn}
-# Eqn(     
-#      "\\mathbf{A} =",
-#      latexMatrix(A, matrix="bmatrix"),
-#      latexMatrix("x", nrow = "n", ncol=1),
-#      Eqn_hspace(mid='='), 
-#      latexMatrix(matrix(b, ncol = 1))
-# )
+### Code the equation in R matlib (commented out):
+
 ```
-### Show equations (in Latex):
-$$
+Eqn(
+    "\\mathbf{A} =",
+     latexMatrix(A, matrix="bmatrix"),
+     latexMatrix("x", nrow = 4, ncol=1),
+     Eqn_hspace(mid='='), 
+     latexMatrix(matrix(b, ncol = 1))
+)
+```
+
+### Show equation (R's Latex output):
+
+```{=latex}
 \begin{equation*}
 \mathbf{A} =\begin{bmatrix} 
 -2 &  1 &  0 &  2 \\ 
@@ -73,8 +79,8 @@ $$
 \begin{pmatrix} 
   x_{1} \\ 
   x_{2} \\ 
-  \vdots \\ 
-  x_{n} \\ 
+  x_{3} \\ 
+  x_{4} \\ 
 \end{pmatrix}
 \quad=\quad\begin{pmatrix} 
 -3 \\ 
@@ -83,133 +89,28 @@ $$
  3 \\ 
 \end{pmatrix}
 \end{equation*}
-$$
-
-
-### Solve equation:
-```{r solveab}
-Solve(A, b, vars = paste0('x', 1:4))
 ```
 
-```{r solveverbose}
-Solve(A, b, verbose = TRUE, fractions = TRUE) ### arrives to solution by going step by step with Gaussian elementary row edits
-```
+### Code equation solving:
 
 ```
-# Showing solution verbose step by step, ie. the row operations, created by `Solve` command above:
-Initial matrix:
-     x1 x2 x3 x4   
-[1,] -2  1  0  2 -3
-[2,]  3 -2  0 -5  5
-[3,] -2  3  2 12 -3
-[4,]  2 -2 -1 -7  3
+Solve(A, b, fractions = TRUE)
+```
 
-row: 1 
+### Show the final result of the equation (not Latex, plain):
 
- exchange rows 1 and 2 
-     x1 x2 x3 x4   
-[1,]  3 -2  0 -5  5
-[2,] -2  1  0  2 -3
-[3,] -2  3  2 12 -3
-[4,]  2 -2 -1 -7  3
-
- multiply row 1 by 1/3 
-     x1   x2   x3   x4       
-[1,]    1 -2/3    0 -5/3  5/3
-[2,]   -2    1    0    2   -3
-[3,]   -2    3    2   12   -3
-[4,]    2   -2   -1   -7    3
-
- multiply row 1 by 2 and add to row 2 
-     x1   x2   x3   x4       
-[1,]    1 -2/3    0 -5/3  5/3
-[2,]    0 -1/3    0 -4/3  1/3
-[3,]   -2    3    2   12   -3
-[4,]    2   -2   -1   -7    3
-
- multiply row 1 by 2 and add to row 3 
-     x1   x2   x3   x4       
-[1,]    1 -2/3    0 -5/3  5/3
-[2,]    0 -1/3    0 -4/3  1/3
-[3,]    0  5/3    2 26/3  1/3
-[4,]    2   -2   -1   -7    3
-
- multiply row 1 by 2 and subtract from row 4 
-     x1    x2    x3    x4         
-[1,]     1  -2/3     0  -5/3   5/3
-[2,]     0  -1/3     0  -4/3   1/3
-[3,]     0   5/3     2  26/3   1/3
-[4,]     0  -2/3    -1 -11/3  -1/3
-
-row: 2 
-
- exchange rows 2 and 3 
-     x1    x2    x3    x4         
-[1,]     1  -2/3     0  -5/3   5/3
-[2,]     0   5/3     2  26/3   1/3
-[3,]     0  -1/3     0  -4/3   1/3
-[4,]     0  -2/3    -1 -11/3  -1/3
-
- multiply row 2 by 3/5 
-     x1    x2    x3    x4         
-[1,]     1  -2/3     0  -5/3   5/3
-[2,]     0     1   6/5  26/5   1/5
-[3,]     0  -1/3     0  -4/3   1/3
-[4,]     0  -2/3    -1 -11/3  -1/3
-
- multiply row 2 by 2/3 and add to row 1 
-     x1    x2    x3    x4         
-[1,]     1     0   4/5   9/5   9/5
-[2,]     0     1   6/5  26/5   1/5
-[3,]     0  -1/3     0  -4/3   1/3
-[4,]     0  -2/3    -1 -11/3  -1/3
-
- multiply row 2 by 1/3 and add to row 3 
-     x1    x2    x3    x4         
-[1,]     1     0   4/5   9/5   9/5
-[2,]     0     1   6/5  26/5   1/5
-[3,]     0     0   2/5   2/5   2/5
-[4,]     0  -2/3    -1 -11/3  -1/3
-
- multiply row 2 by 2/3 and add to row 4 
-     x1   x2   x3   x4       
-[1,]    1    0  4/5  9/5  9/5
-[2,]    0    1  6/5 26/5  1/5
-[3,]    0    0  2/5  2/5  2/5
-[4,]    0    0 -1/5 -1/5 -1/5
-
-row: 3 
-
- multiply row 3 by 5/2 
-     x1   x2   x3   x4       
-[1,]    1    0  4/5  9/5  9/5
-[2,]    0    1  6/5 26/5  1/5
-[3,]    0    0    1    1    1
-[4,]    0    0 -1/5 -1/5 -1/5
-
- multiply row 3 by 4/5 and subtract from row 1 
-     x1   x2   x3   x4       
-[1,]    1    0    0    1    1
-[2,]    0    1  6/5 26/5  1/5
-[3,]    0    0    1    1    1
-[4,]    0    0 -1/5 -1/5 -1/5
-
- multiply row 3 by 6/5 and subtract from row 2 
-     x1   x2   x3   x4       
-[1,]    1    0    0    1    1
-[2,]    0    1    0    4   -1
-[3,]    0    0    1    1    1
-[4,]    0    0 -1/5 -1/5 -1/5
-
- multiply row 3 by 1/5 and add to row 4 
-     x1 x2 x3 x4   
-[1,]  1  0  0  1  1
-[2,]  0  1  0  4 -1
-[3,]  0  0  1  1  1
-[4,]  0  0  0  0  0
-
-row: 4 
+```
 x1       + x4  =   1 
   x2   + 4*x4  =  -1 
     x3   + x4  =   1 
+            0  =   0 
 ```
+
+### Show whole verbose solution, ie. each row operation, created by command `Solve`:
+
+```{r solveverbose}
+# thx to `verbose = TRUE` it outputs solution step by
+# step with Gaussian elementary row operations
+Solve(A, b, verbose = TRUE, fractions = TRUE)
+```
+
