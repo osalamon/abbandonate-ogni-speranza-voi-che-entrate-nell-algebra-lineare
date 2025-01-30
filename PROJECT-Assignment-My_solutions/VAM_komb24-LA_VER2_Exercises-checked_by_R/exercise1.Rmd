@@ -4,18 +4,38 @@ papersize: a4
 linestretch: 1.5
 fontsize: 12pt
 links-as-notes: true
-title: "LA1 version 2 - exercise 1"
+title: LA1 version 2 - exercise 1
 author: Ondrej Salamon
 date: January, 2025
+header-includes: |
+   ```{=latex}
+   \usepackage{fancyhdr}
+   \usepackage{amsmath}
+   \pagestyle{fancy}
+   \fancyhead{}
+   \fancyfoot{}
+   \lhead{LA1 version 2 - exercise 1}
+   \rhead{My Note}
+   \lfoot{\today}\rfoot{Pg. \thepage}
+   ```
+output:
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+mainfont: Calibri Light
 ---
 
 ```{r initial setup}
+# initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
 library(matlib)
 library(knitr)
 library(rmarkdown)
 library(quarto)
 library(tinytex)
 library(pandoc)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width=6, fig.height=6)
 ```
 
 ## Find all solution of systems of linear equations of the form **Ax=b**, where:
@@ -31,9 +51,18 @@ A <- matrix(
 b <- c(-3, 5, -3, 3)
 ```
 
+### Show equations (setup):
+```{r eqn}
+# Eqn(     
+#      "\\mathbf{A} =",
+#      latexMatrix(A, matrix="bmatrix"),
+#      latexMatrix("x", nrow = "n", ncol=1),
+#      Eqn_hspace(mid='='), 
+#      latexMatrix(matrix(b, ncol = 1))
+# )
+```
 ### Show equations (in Latex):
-
-```{=latex}
+$$
 \begin{equation*}
 \mathbf{A} =\begin{bmatrix} 
 -2 &  1 &  0 &  2 \\ 
@@ -54,7 +83,8 @@ b <- c(-3, 5, -3, 3)
  3 \\ 
 \end{pmatrix}
 \end{equation*}
-```
+$$
+
 
 ### Solve equation:
 ```{r solveab}
@@ -183,7 +213,3 @@ x1       + x4  =   1
   x2   + 4*x4  =  -1 
     x3   + x4  =   1 
 ```
-<!-- 
-```{=latex}
-\end{document}
-``` -->
