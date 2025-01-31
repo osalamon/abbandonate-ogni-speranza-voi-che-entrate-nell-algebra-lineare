@@ -1,0 +1,126 @@
+\documentclass{article}
+% preamble
+
+# FIXME obiously wrong
+\begin{document}
+# Maths Nitty Witty Misc Stuff
+
+## Initial setup (load matlib library)
+```{r init}
+library(matlib)
+library(rmarkdown)
+library(knitr)
+library(pandoc)  # TODO ?? check whether this is correct
+knitr::opts_chunk$set(fig.width=9, fig.height=6) # sets up output figs (9 x 6)
+```
+
+## 1. INDEXING each matrices variable element
+```{r indexing}
+A <- matrix(paste0('a_{', outer(1:4, 1:4, FUN  = paste0), '}'), 
+            nrow=4)
+```
+
+```{r showa}
+A
+```
+
+# TODO not sure whether this below is correct either
+
+```{r lat}
+a <- latexMatrix(
+      A
+) |> print()
+matrix2latex(A)
+```
+
+
+```{r bxfold}
+b <- paste0("b_", 1:4)
+x <- paste0("x_", 1:4)
+```
+
+```{r bxrun}
+b
+x
+```
+
+TODO renders twice, both times badly, fix
+
+```{r eqn}
+latexMatrix(
+      matrix(showEqn(A, matrix(b, nrow = 1), vars = matrix(x, nrow = 1), latex = TRUE))
+)
+```
+
+TODO wrong below
+
+$$
+\begin{array}{lllllllll}
+      a_{11} \cdot x__1 &+& a_{12} \cdot x__2 &+& a_{13} \cdot x__3 &+& a_{14} \cdot x__4  &=&  b_1 \\ 
+      a_{21} \cdot x__1 &+& a_{22} \cdot x__2 &+& a_{23} \cdot x__3 &+& a_{24} \cdot x__4  &=&  b_2 \\ 
+      a_{31} \cdot x__1 &+& a_{32} \cdot x__2 &+& a_{33} \cdot x__3 &+& a_{34} \cdot x__4  &=&  b_3 \\ 
+      a_{41} \cdot x__1 &+& a_{42} \cdot x__2 &+& a_{43} \cdot x__3 &+& a_{44} \cdot x__4  &=&  b_4 \\ 
+\end{array}
+$$
+
+
+## 2. DISCOVERED accidentally totally AWESOME COOL FN **`OUTER`**!!!
+## TODO learn more about it
+
+## So far I found out:
+### The fn takes 1st arg and makes (eg. 1:3) rows as plain chars for each column (thx to FUN paste0),ie.
+#### 1, 1, 1, ...
+#### 2, 2, 2, ...
+#### 3, 3, 3, ...
+## But true magic happens when the 2nd argument creates (1:3) columns for each row
+
+
+# outer(X, Y, FUN = "*", ...) => 1st argument X and 2nd argument Y are usually arrays, vectors
+# the easiest way how to understand is like chess: a1, b1, ..., h1 \n a2, b2, ..., h2 \n etc
+# fn FUN => it is used as product for each element X times (ie. FUN) each element Y...
+
+### To compile me, use
+```{r compile, eval=FALSE}
+library(knitr)
+knit('math-basic-howtos/some-math-usefulness.Rmd')
+```
+
+## 3. ANOTHER quite extraordinary interesting functions - Inverse (or inv) (as well knitr::purl)
+## TODO check them and play with them at least for a moment, also, clean this mess:
+
+library(matlib)
+
+A <- matrix( c(5, 1, 0,
+               3,-1, 2,
+               4, 0,-1), nrow=3, byrow=TRUE)
+det(A) # Only non-singular matrices have an inverse.
+inv(A)
+Inverse(A, verbose=TRUE, fractions=TRUE) #fractions=FALSE) # verbose=TRUE, 
+
+
+(x <- matrix(1:4, ncol = 2))
+unlist(determinant(x))
+det(x)
+
+B <- matrix(1:12, 3, 4) / 6
+printMatrix(B, fractions=TRUE)
+printMatrix(B, latex=TRUE)
+
+library(knitr)
+wrap_rmd(text = c("```", "1+1", "```", "- a list item", "> a quote", "",
+                  paste(rep("this is a normal paragraph", 5), collapse = " ")))
+
+
+library(knitr)
+(f = system.file("examples", "knitr-minimal.Rmd", package = "knitr"))
+knit(f)  # compile to tex
+
+purl(f)  # tangle R code
+purl(f, documentation = 0)  # extract R code only
+purl(f, documentation = 2)  # also include documentation
+
+unlink(c("knitr-minimal.tex", "knitr-minimal.R", "figure"), recursive = TRUE)
+
+## 4. TODO - another function = echelon(A, b)
+
+\end{document}

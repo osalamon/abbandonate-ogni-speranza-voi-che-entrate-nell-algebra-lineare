@@ -1,0 +1,116 @@
+---
+documentclass: article
+papersize: a4
+#linestretch: 1.5
+fontsize: 10pt
+links-as-notes: true
+title: "LA1 - Version 2 - Exercise 1"
+author: "Ondrej Salamon"
+header-includes: |
+   ```{=latex}
+   \usepackage[margin=0.75in]{geometry}
+   \usepackage{fancyhdr}
+   \let\proof\relax
+   \let\endproof\relax
+   \usepackage{amsmath}
+   \pagestyle{fancy}
+   \fancyhead{}
+   \fancyfoot{}
+   \lhead{LA1 Project}
+   \rhead{Exercise 1 (Version 2)}
+   \lfoot{January, 2025}\rfoot{Pg. \thepage}
+   ```
+output:
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+---
+```{r initial setup}
+# initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
+library(matlib)
+library(knitr)
+library(rmarkdown)
+library(quarto)
+library(tinytex)
+library(pandoc)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)
+```
+
+## Find all solution of systems of linear equations of the form **Ax=b**, where:
+
+```{r equationsmatrix}
+# enter variable (matrix) A in R matlib pkg
+A <- matrix(
+        c(-2, 1, 0,  2,
+           3,-2, 0, -5,
+          -2, 3, 2, 12,
+           2,-2,-1, -7), 4, 4, byrow=TRUE)
+```
+
+```{r righthandside}
+# enter variable with right hand side vertical vector
+b <- c(-3, 5, -3, 3)
+```
+
+### Code the equation in R matlib:
+
+```
+Eqn(
+    "\\mathbf{A} =",
+     latexMatrix(A, matrix="bmatrix"),
+     latexMatrix("x", nrow = 4, ncol=1),
+     Eqn_hspace(mid='='), 
+     latexMatrix(matrix(b, ncol = 1))
+)
+```
+
+### Show equation (R's Latex output):
+
+```{=latex}
+\begin{equation*}
+\mathbf{A} =\begin{bmatrix} 
+-2 &  1 &  0 &  2 \\ 
+ 3 & -2 &  0 & -5 \\ 
+-2 &  3 &  2 & 12 \\ 
+ 2 & -2 & -1 & -7 \\ 
+\end{bmatrix}
+\begin{pmatrix} 
+  x_{1} \\ 
+  x_{2} \\ 
+  x_{3} \\ 
+  x_{4} \\ 
+\end{pmatrix}
+\quad=\quad\begin{pmatrix} 
+-3 \\ 
+ 5 \\ 
+-3 \\ 
+ 3 \\ 
+\end{pmatrix}
+\end{equation*}
+```
+
+### Code equation solving:
+
+```
+Solve(A, b, fractions = TRUE)
+```
+
+### Show the final result of the equation (not Latex, plain):
+
+```
+x1       + x4  =   1 
+  x2   + 4*x4  =  -1 
+    x3   + x4  =   1 
+            0  =   0 
+```
+
+### Show whole verbose solution, ie. each row operation, created by command `Solve`:
+
+```{r solveverbose}
+# thx to `verbose = TRUE` it outputs solution step by
+# step with Gaussian elementary row operations
+Solve(A, b, verbose = TRUE, fractions = TRUE)
+```
+

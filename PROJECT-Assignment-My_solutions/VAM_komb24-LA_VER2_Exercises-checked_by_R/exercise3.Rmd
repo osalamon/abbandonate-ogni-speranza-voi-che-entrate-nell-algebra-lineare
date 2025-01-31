@@ -1,0 +1,82 @@
+---
+documentclass: article
+papersize: a4
+#linestretch: 1.5
+fontsize: 10pt
+links-as-notes: true
+title: "LA1 - Version 2 - Exercise 3"
+author: "Ondrej Salamon"
+header-includes: |
+   ```{=latex}
+   \usepackage[margin=0.75in]{geometry}
+   \usepackage{fancyhdr}
+   \let\proof\relax
+   \let\endproof\relax
+   \usepackage{amsmath}
+   \pagestyle{fancy}
+   \fancyhead{}
+   \fancyfoot{}
+   \lhead{LA1 Project}
+   \rhead{Exercise 3 (Version 2)}
+   \lfoot{January, 2025}\rfoot{Pg. \thepage}
+   ```
+output:
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+---
+```{r initial setup}
+# initial setup
+options(scipen = 999)
+options(tinytex.verbose = TRUE)
+library(matlib)
+library(knitr)
+library(rmarkdown)
+library(quarto)
+library(tinytex)
+library(pandoc)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, fig.width=6, fig.height=6)
+```
+
+## System of linear equations of the form **Ax=b**, where:
+```{r equationsmatrix}
+A <- matrix(
+        c( 1, 1, 2,
+           1, 1, 0 ), 2, 3, byrow=TRUE)
+
+b <- c(0, 1)
+```
+
+### Code the equation in R matlib:
+
+```
+showEqn(A, b, fractions = TRUE, latex = TRUE)
+```
+
+### Show equation (R's Latex output):
+
+$$
+\begin{array}{lllllll}
+1 \cdot x_1 &+& 1 \cdot x_2 &+& 2 \cdot x_3  &=&  0 \\ 
+1 \cdot x_1 &+& 1 \cdot x_2 &+& 0 \cdot x_3  &=&  1 \\ 
+\end{array}
+$$
+
+### Code equation solution:
+
+```
+Solve(A, b, fractions = TRUE)
+```
+
+### Show the final result of the equation (not Latex, plain):
+
+```
+x1 + x2    =     1 
+       x3  =  -0.5 
+```
+
+### Show whole step by step verbose solution:
+
+```{r solveverbose}
+Solve(A, b, verbose = TRUE, fractions = TRUE)
+```
