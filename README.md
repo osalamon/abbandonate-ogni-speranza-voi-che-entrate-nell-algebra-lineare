@@ -7,3 +7,22 @@ In the most common ENG translation, it is  "Abandon all hope, ye who enter here"
 ## Anyway, the Linear algebra is not in any sensible sense near Dante's description of Hell. I just found it mildly funny and it is - at least - not just a common repo name.
 
 So cheers and enjoy!
+
+---
+
+# Rozcest
+
+RMarkdown:
+  type: prose
+  color: "#198ce7"
+  wrap: true
+  ace_mode: markdown
+  codemirror_mode: gfm
+  codemirror_mime_type: text/x-gfm
+  extensions:
+  - ".qmd"
+  - ".rmd"
+  tm_scope: text.md
+  language_id: 313
+
+  
