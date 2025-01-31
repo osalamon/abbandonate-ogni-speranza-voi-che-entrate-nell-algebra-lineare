@@ -1,9 +1,9 @@
 # Linear Algebra 1 - Homework project / exercises
 ## Ondrej Salamon / SAL0110, ondrej.salamon@vsb.cz, Jan 31 2025                  
 
-#### [My final solution in PDF for most of the assigned examples.](PROJECT-Assignment-My_solutions/VAM_komb25-LA1_Ver2-my_final_solutions.pdf) Just FYI, I was supposed to develop exercises **version 2**.
+#### [My final solution in PDF for most of the assigned examples.](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb25-LA1_Ver2-my_final_solutions.pdf) Just FYI, I was supposed to develop exercises **version 2**.
 
-#### Not relevant per se but [this PDF contains a bit of various other (often unfinished or half-finished) exercises I did during the autumn 2024](PROJECT-Assignment-My_solutions/VAM_komb24-LA_various_unfinished_excercises/various_excercises-half-ok-half-not.pdf)
+#### Not relevant per se but [this PDF contains a bit of various other (often unfinished or half-finished) exercises I did during the autumn 2024](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_various_unfinished_excercises/various_excercises-half-ok-half-not.pdf)
 
 ******
 
@@ -17,11 +17,11 @@
 
 ##### The PDF as well as HTML outputs of the exercises done by R and Rmarkdown are certainly not perfect. All the exercises obviously belong to the version 2:
 
-* **exercise 1** - [PDF](https://github.com/osalamon/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/blob/eda70d3edb9713e02b586439d624a96145a22ad9/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise1.pdf), [HTML](/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise1.html)
-* **exercise 2** - [PDF](/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise2.pdf), [HTML](/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise2.html)
-* **exercise 3** - [PDF](PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise3.pdf), [HTML](/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise3.html)
-* **exercise 4** - [PDF](PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise4.pdf), [HTML](/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise4.html)
-* **exercise 6** - [PDF](PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise6.pdf), [HTML](/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise6.html)
+* **exercise 1** - [PDF](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise1.pdf), [HTML](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise1.html)
+* **exercise 2** - [PDF](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise2.pdf), [HTML](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise2.html)
+* **exercise 3** - [PDF](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise3.pdf), [HTML](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise3.html)
+* **exercise 4** - [PDF](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise4.pdf), [HTML](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise4.html)
+* **exercise 6** - [PDF](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise6.pdf), [HTML](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_VER2_Exercises-checked_by_R/exercise6.html)
 
 ******
 ******
