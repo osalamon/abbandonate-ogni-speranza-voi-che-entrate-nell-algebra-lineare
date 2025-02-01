@@ -2,17 +2,23 @@
 title: "Linear Algebra 1 - Homework project / exercises"
 author: "Ondrej Salamon / SAL0110, ondrej.salamon@vsb.cz"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    theme: sandstone
-    highlight: tango
+output: 
+  rmdformats::downcute:
+    downcute_theme: "chaos"
+    self_contained: true
+    default_style: "light"
+    embed_fonts: TRUE
 ---
+
+## 1. My solution of the project in PDF - final
 
 #### [My final solution in PDF for most of the assigned examples.](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb25-LA1_Ver2-my_final_solutions.pdf) Just FYI, I was supposed to develop exercises **version 2**.
 
+## 2. Other random exercises I tried to solve (PDF)
+
 #### Not relevant per se but [this PDF contains a bit of various other (often unfinished or half-finished) exercises I did during the autumn 2024](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb24-LA_various_unfinished_excercises/various_excercises-half-ok-half-not.pdf)
 
-******
+## 3. R and `matlib` package: can computing devices solve the exercises instead of me? (PDFs and HTMLs)
 
 ##### Here're the results of my playing and learning with R and matrices + RMarkdown + a use of Latex inside the .Rmd files + rendering the files, etc., etc. 
 
@@ -20,7 +26,7 @@ output:
 
 ##### **I didn't use the package for cheating!** I did my assignments by hand **with pencil and my brain only**. Yet, after that, **I just checked the results** whether I was correct. 
 
-##### The reason why I put here the exercises computed by R is to prove my honesty (I arrived to the conclusions almost always in other way than R `matlib`'s algorithms). In that case anybody can check that I haven't used the computer for doing my own homework instead of me. Besides that, it was immense fun to play with the software:-) 
+##### The reason why I put here the exercises computed by R is to prove my honesty. I arrived to the conclusions almost always in other way than algorithms of the R. In that case anybody can check that I haven't used the computer for doing my own homework instead of me. Besides that, it was immense fun to play with the software.
 
 ##### The PDF as well as HTML outputs of the exercises done by R and Rmarkdown are certainly not perfect. All the exercises obviously belong to the version 2:
 

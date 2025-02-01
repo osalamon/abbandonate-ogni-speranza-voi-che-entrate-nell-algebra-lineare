@@ -1,0 +1,42 @@
+---
+title: "A Cool Presentation"
+output:
+  xaringan::moon_reader:
+    css: [default, uol]
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+      highlightLines: true
+---
+
+# adfsa fsadfas fsadfs
+
+### sdfsad
+---
+
+One slide.
+```r
+if (TRUE) {
+* message("Very important!")
+}
+```
+
+---
+class: center, inverse
+
+
+Another slide.
+```{r tidy=FALSE}
+if (TRUE) {
+{{ message("Very important!") }}
+}
+```
+
+---
+```{r tidy=FALSE}
+library(ggplot2)
+ggplot(mtcars) +
+  aes(mpg, disp) +
+  geom_point() +   #<<
+  geom_smooth()    #<<
+```
