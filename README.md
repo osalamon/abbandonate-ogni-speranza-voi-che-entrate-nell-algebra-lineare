@@ -1,4 +1,4 @@
-# Linear Algebra 1 - Homework project / exercises
+# [Linear Algebra 1 - Homework project / exercises](https://osalamon.github.io/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/) - the main page of the project deployed at GitHub Pages
 ## Ondrej Salamon / SAL0110, ondrej.salamon@vsb.cz, Jan 31 2025                  
 
 #### [My final solution in PDF for most of the assigned examples.](/abbandonate-ogni-speranza-voi-che-entrate-nell-algebra-lineare/PROJECT-Assignment-My_solutions/VAM_komb25-LA1_Ver2-my_final_solutions.pdf) Just FYI, I was supposed to develop exercises **version 2**.
